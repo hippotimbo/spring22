@@ -13,9 +13,8 @@ Bus rapid transit (BRT) systems attempt to improve the quality of bus services b
 
 Ultimately this results in a Nash equilibrium where each operator chooses to employ more buses than is optimal for the sake of passenger utility. Because each operator seeks to maximize its revenue and avoid the worst-case scenarios, the rational choice for both is to increase frequency to the point where travel speed along the BRT corridor is slow and the revenue low.
 
-![Nash equilibrium](https://user-images.githubusercontent.com/59413070/173248133-ff3e712d-1602-4c30-b02d-0110ae25160f.png)|![image](https://user-images.githubusercontent.com/59413070/173249493-b12dd606-cef4-443d-9daf-f60327ffc4d6.png)
-:--:|:--:
-<b> Dotted line as average travel time from A to B at t_<sub>0</sub>.</b>|<b>Travel time from B to C extrapolated using trip from A to C(pink).</b>
+![Nash equilibrium](https://user-images.githubusercontent.com/59413070/173248133-ff3e712d-1602-4c30-b02d-0110ae25160f.png)
+
 
 
 
@@ -30,12 +29,33 @@ As such, by adjusting the timetables of multiple lines along a shared BRT corrid
 * Extrapolates varying travel times between consecutive bus stops by time of day from smart card data.
 * Divides the day into 1,440 intervals (1 minute) and calculates the average travel time for each link at each interval.
 * Makes use of multiple-stop trip entries by dividing them into several consecutive segments.
-* 
+* Solved using CPLEX.
 
 #### Challenges & Shortcomings
 * Travel times are dependent on time of day only.
 * Cannot distinguish between time spent on boarding/disboarding, waiting in queue, and actual travelling.
-![image](https://user-images.githubusercontent.com/59413070/173249479-8af7993a-39d7-4d99-95da-e974fc716294.png)
+
+![image](https://user-images.githubusercontent.com/59413070/173249479-8af7993a-39d7-4d99-95da-e974fc716294.png)|![image](https://user-images.githubusercontent.com/59413070/173249493-b12dd606-cef4-443d-9daf-f60327ffc4d6.png)
+:--:|:--:
+<b> Average travel time from A to B at t<sub>0</sub> (dotted line).</b>|<b>Travel time from B to C extrapolated using trip from A to C (pink).</b>
+
+### 2. A bi-level programming for bus lane network design (Yu et al., 2015)
+#### Summary
+* Algorithm for identifying best locations for bus-only lanes.
+* Employs BPR function to calculate dwell times, and travel times for bus-only lanes and mixed traffic lanes.
+* User equilibrium among modes and routes depending on travel time.
+* Frequency optimization for given layout of bus-only lanes.
+
+![Dalian](https://user-images.githubusercontent.com/59413070/173250487-79014f5b-bbec-4c49-b881-9845b477a7c7.PNG)
+
+#### Challenges & Shortcomings
+* Travel times are dependent on time of day only.
+* BPR function parameters ($\alpha$, $\beta$) fixed at the generic values.
+* No calibration and comfirmation of model design with actual figures.
+
+
+
+
 
 
 ### Markdown
