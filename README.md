@@ -146,10 +146,12 @@ It need be noted however that when looking at each individual link between two c
 
 ## V. Concluding Remarks
 ### Next steps for this study
-- [x] Simplify network by truncating branches
+- [x] Simplify network by truncating branches.
 <img src="https://user-images.githubusercontent.com/59413070/173253829-7eb6fcc3-9d51-4b8c-a3d2-7c1a1216cb97.png" height="250"/>
-- [ ] Elect more fit model for estimating dwell time and travel time (separately)
-- [ ] Add capacity and maximum travel time constraints
+  
+- [ ] Elect more fit model for estimating dwell time and travel time. (separately)
+- [ ] Add capacity and maximum travel time constraints.
 
 ### Further studies
-* Introduce comptetition between operators
+* Introduce comptetition between operators.
+* Differentiate waiting time value and travelling time value.
