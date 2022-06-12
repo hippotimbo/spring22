@@ -141,7 +141,8 @@ An exploration of the travel time from one end of the BRT corridor to another cl
 ![deptime hist](https://user-images.githubusercontent.com/59413070/173253309-ec48dd1c-ba09-4dda-9003-228deb7d59f7.png)|![all lines hist](https://user-images.githubusercontent.com/59413070/173253311-b149c5e5-d16f-443b-8e93-2f18d024ec64.png)
 
 It need be noted however that when looking at each individual link between two consecutive stations, no such correlation could be observed. This is probably due to the fact that while travel time dominates dwell time on a larger scale such is not the case at the segment level.
-  <b>Travel Time on a single link (Busiest Link)</b>|<b>Travel Time on a single link (Terminus Link)</b>
+  
+<b>Travel Time on a single link (Busiest Link)</b>|<b>Travel Time on a single link (Terminus Link)</b>
 :--:|:--:
 ![image](https://user-images.githubusercontent.com/59413070/173253409-07546470-9494-41a9-8e3b-fa1fb815b549.png)|![image](https://user-images.githubusercontent.com/59413070/173253413-0082ad61-9160-41be-bf9d-9c23743e86d3.png)
 
