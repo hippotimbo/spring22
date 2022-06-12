@@ -57,6 +57,8 @@ As such, by adjusting the timetables of multiple lines along a shared BRT corrid
 ## III. Data Wrangling
 Smart card data for a four-day period (16 Sep ~ 19 Sep 2017) was used. Data for each day contains 20+ million rows, where each row represents one unlinked trip. In cases where the passenger transferred from one bus to another, it is recorded as two separate trips. For each trip, the time at which the passenger tapped on and off the bus, as well as the location in terms of the nearest stop was recorded. Additionally, the license plate and departure time at origin, as well as the line number, for each bus is included. If multiple passnegers used the same smart card to board, the number of passengers is also specified.
 
+
+### Glimpse
 ```
 glimpse(sample_df)
 ```
@@ -64,6 +66,7 @@ glimpse(sample_df)
 :--:
 <b> sample structure of data used </b>|
 
+### OD and operation records
 <details>
 <summary>Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.</summary>
 
@@ -102,6 +105,14 @@ this_onoff <-
 this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
 ```
 </details>
+
+![arregated](https://user-images.githubusercontent.com/59413070/173253531-6cb942b5-ff9c-4e72-a2b6-2e2e56942d16.PNG)
+:--:
+Note the significant number of NA's indicating no boarding or alighting passengers at that stop|
+
+  
+## IV. Preliminary results
+### Dwell time
   
 It was found that the overwhelming proportions of stops only involved a handful of boardings and alightings, if at all.
  
@@ -109,10 +120,29 @@ It was found that the overwhelming proportions of stops only involved a handful 
 :--:
 ![Rplot01](https://user-images.githubusercontent.com/59413070/173252061-f8ae6eca-add8-48b3-ad3b-88ab4e81c0c2.png)
 
-As explored above by Yu et al. (2015), the BPR function on dwell time assumes that dwell time is dependent on the dominant action at that stop, i.e. the greater number between boardings and alightings. Applying the same principle to this data however suggested that not only is that not the case, the utilization of the BPR function is impossible. The <i>maxdwell</i> time is calculated as the difference between the latest boarding or alighting time and the earliest boarding time. This represents the longest feasible dwell time, as the first boarding must have happened after the bus came to a full stop and all alightings may have happened before the bus departed.
+As explored above by Yu et al. (2015), the BPR function on dwell time assumes that dwell time is dependent on the dominant action at that stop, i.e. the greater number between boardings and alightings. Applying the same principle to this data however suggested that not only is that not the case, the utilization of the BPR function is impossible. The <i>maxdwell</i> time is calculated as the difference between the latest boarding or alighting time and the earliest boarding time. This represents the longest feasible dwell time, as the first boarding must have happened after the bus came to a full stop and all alightings may have happened before the bus departed. In cases where only one tag was made at a stop, the dwell time is assumed to have been zero and excluded from regression.
+Other values calculated by combinations of tag-in and tag-out times were also explored, but none yielded acceptable values.
 
 <b> Dwell time shows no meaningful correlation with number of boarding/alighting passengers|
 :--:
 ![Rplot](https://user-images.githubusercontent.com/59413070/173252225-2dad85e6-53f7-42a3-89cd-727158c7fb53.png)
   
  
+### Travel time
+Because the chosen method of estimating dwell time was not viable, meaningful attempts at deducing travel time could not be made. Instead, the more simplified algorithm established by Wang et al. (2017) was used to extrapolate a **link** time, which conceptually is the sum of dwell time and travel time for each link.
+
+An exploration of the travel time from one end of the BRT corridor to another clearly showed a temporal variance throughout the day, with the morning and evening rush hours requiring double the time in comparison to the earliest and latest buses of the day. This is also in line with the number of bus departures by time of day. In other words, the frequency of buses appears to have a positive correlation with travel time on the bus-only lane.
+  
+  <b>Travel Time along BRT Corridor (Busiest Line)</b>|<b>Travel Time along BRT Corridor (All Lines)</b>
+:--:|:--:
+![image](https://user-images.githubusercontent.com/59413070/173252808-1d53c8f8-bbe8-4e4f-a08e-44200422cfc7.png)|![image](https://user-images.githubusercontent.com/59413070/173252812-054488b5-2a1b-44ef-8175-38e8bba0ec8e.png)
+  <b># of Buses by Hour (Busiest Line)</b>|<b># of Buses by Hour (All Lines)</b>
+![deptime hist](https://user-images.githubusercontent.com/59413070/173253309-ec48dd1c-ba09-4dda-9003-228deb7d59f7.png)|![all lines hist](https://user-images.githubusercontent.com/59413070/173253311-b149c5e5-d16f-443b-8e93-2f18d024ec64.png)
+
+It need be noted however that when looking at each individual link between two consecutive stations, no such correlation could be observed. This is probably due to the fact that while travel time dominates dwell time on a larger scale such is not the case at the segment level.
+  <b>Travel Time on a single link (Busiest Link)</b>|<b>Travel Time on a single link (Terminus Link)</b>
+:--:|:--:
+![image](https://user-images.githubusercontent.com/59413070/173253409-07546470-9494-41a9-8e3b-fa1fb815b549.png)|![image](https://user-images.githubusercontent.com/59413070/173253413-0082ad61-9160-41be-bf9d-9c23743e86d3.png)
+
+## V. Concluding Remarks
+### 
