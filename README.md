@@ -1,4 +1,5 @@
 # Timetable Optimization of Multiple Bus Routes Along a Shared BRT Corridor
+
 ## I. Introduction
 ### 1. Why I Want to Solve this Problem.
 Bus rapid transit (BRT) systems attempt to improve the quality of bus services by separating their right of way from other traffic, making them immune to congestion. They are widely regarded as a significantly cheaper alternative to metros or other rail systems. While higher-level systems may implement features such as grade-separation and priority signals at intersections, passing lanes at stations, off-board fare collection, and platform-level boarding, rudimentary ones consist simply of a bus-only lane.When multiple lines operate on this one lane at high frequencies (e.g., during peak hours), the bus lane itself can become congested such that it becomes even slower than "normal" lanes. This is especially so when multiple operators compete along the same corridor since while operating at a higher frequency will yield more revenue for that line at the expense of the travel time of all other passengers.
