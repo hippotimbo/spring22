@@ -64,7 +64,7 @@ Smart card data for a four-day period (16 Sep ~ 19 Sep 2017) was used. Data for 
 glimpse(sample_df)
 ```
 ![image](https://user-images.githubusercontent.com/59413070/173251346-601802a5-514a-4714-aacf-43f4cd325901.png)
-:--:
+:--:|
 <b> sample structure of data used </b>|
 
 ### OD and operation records
@@ -108,7 +108,7 @@ this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
 </details>
 
 ![arregated](https://user-images.githubusercontent.com/59413070/173253531-6cb942b5-ff9c-4e72-a2b6-2e2e56942d16.PNG)
-:--:
+:--:|
 Note the significant number of NA's indicating no boarding or alighting passengers at that stop|
 
   
@@ -118,14 +118,14 @@ Note the significant number of NA's indicating no boarding or alighting passenge
 It was found that the overwhelming proportions of stops only involved a handful of boardings and alightings, if at all.
  
 <b> Distributions of boardings and alightings|
-:--:
+:--:|
 ![Rplot01](https://user-images.githubusercontent.com/59413070/173252061-f8ae6eca-add8-48b3-ad3b-88ab4e81c0c2.png)
 
 As explored above by Yu et al. (2015), the BPR function on dwell time assumes that dwell time is dependent on the dominant action at that stop, i.e. the greater number between boardings and alightings. Applying the same principle to this data however suggested that not only is that not the case, the utilization of the BPR function is impossible. The <i>maxdwell</i> time is calculated as the difference between the latest boarding or alighting time and the earliest boarding time. This represents the longest feasible dwell time, as the first boarding must have happened after the bus came to a full stop and all alightings may have happened before the bus departed. In cases where only one tag was made at a stop, the dwell time is assumed to have been zero and excluded from regression.
 Other values calculated by combinations of tag-in and tag-out times were also explored, but none yielded acceptable values.
 
 <b> Dwell time shows no meaningful correlation with number of boarding/alighting passengers|
-:--:
+:--:|
 ![Rplot](https://user-images.githubusercontent.com/59413070/173252225-2dad85e6-53f7-42a3-89cd-727158c7fb53.png)
   
  
