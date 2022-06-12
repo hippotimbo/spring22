@@ -33,7 +33,7 @@ As such, by adjusting the timetables of multiple lines along a shared BRT corrid
 
 #### Challenges & Shortcomings
 * Travel times are dependent on time of day only.
-* Cannot distinguish between time spent on boarding/disboarding, waiting in queue, and actual travelling.
+* Cannot distinguish between time spent on boarding/alighting, waiting in queue, and actual travelling.
 
 ![image](https://user-images.githubusercontent.com/59413070/173249479-8af7993a-39d7-4d99-95da-e974fc716294.png)|![image](https://user-images.githubusercontent.com/59413070/173249493-b12dd606-cef4-443d-9daf-f60327ffc4d6.png)
 :--:|:--:
@@ -54,38 +54,65 @@ As such, by adjusting the timetables of multiple lines along a shared BRT corrid
 * No calibration and comfirmation of model design with actual figures.
 
 
+## III. Data Wrangling
+Smart card data for a four-day period (16 Sep ~ 19 Sep 2017) was used. Data for each day contains 20+ million rows, where each row represents one unlinked trip. In cases where the passenger transferred from one bus to another, it is recorded as two separate trips. For each trip, the time at which the passenger tapped on and off the bus, as well as the location in terms of the nearest stop was recorded. Additionally, the license plate and departure time at origin, as well as the line number, for each bus is included. If multiple passnegers used the same smart card to board, the number of passengers is also specified.
 
-
-
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
+glimpse(sample_df)
+```
+![image](https://user-images.githubusercontent.com/59413070/173251346-601802a5-514a-4714-aacf-43f4cd325901.png)
+:--:
+<b> sample structure of data used </b>|
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+<details>
+<summary>Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.</summary>
 
-### Jekyll Themes
+```
+today_brt[today_brt == "~"] <- NA
+today_brt$운행출발일시  <- ymd_hms(today_brt$운행출발일시)
+today_brt$승차일시  <- ymd_hms(today_brt$승차일시)
+today_brt$하차일시  <- ymd_hms(today_brt$하차일시)
+today_brt$하차정류장ID_정산사업자  <- as.numeric(today_brt$하차정류장ID_정산사업자)
+today_brt$승차정류장ID_교통사업자 <- mapvalues(
+  today_brt$승차정류장ID_교통사업자,
+  from = c(9004357,9034780,9034778,9034804,9034774,9034799,9036576,7000088,9034805,9034770),
+  to = c(4106837,4106840,4106851,4106852,4110807,4106859,4106821,4196166,4196168,4106818)
+)
+today_brt$하차정류장ID_정산사업자  <- mapvalues(
+  today_brt$하차정류장ID_정산사업자,
+  from = c(9004357,9034780,9034778,9034804,9034774,9034799,9036576,7000088,9034805,9034770),
+  to = c(4106837,4106840,4106851,4106852,4110807,4106859,4106821,4196166,4196168,4106818)
+)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hippotimbo/spring22/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+#### dw and tt sep ####
+this_on <- today_brt %>%
+  group_by(노선ID_정산사업자,운행출발일시,승차정류장ID_교통사업자,차량등록번호) %>%
+  dplyr::summarise(boardings=sum(이용객수_다인승),firston=min(승차일시),laston=max(승차일시))
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+this_off <- today_brt %>%
+  group_by(노선ID_정산사업자,운행출발일시,하차정류장ID_정산사업자,차량등록번호) %>%
+  dplyr::summarise(alightings=sum(이용객수_다인승),firstoff=min(하차일시),lastoff=max(하차일시))
+
+this_onoff <-
+  full_join(this_on,
+            this_off,
+            by = c('노선ID_정산사업자', '차량등록번호','운행출발일시', '승차정류장ID_교통사업자' = '하차정류장ID_정산사업자')) |>
+  filter(is.na(boardings)|is.na(alightings)|(boardings < 60 & alightings < 60))
+this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
+```
+</details>
+  
+It was found that the overwhelming proportions of stops only involved a handful of boardings and alightings, if at all.
+ 
+<b> Distributions of boardings and alightings|
+:--:
+![Rplot01](https://user-images.githubusercontent.com/59413070/173252061-f8ae6eca-add8-48b3-ad3b-88ab4e81c0c2.png)
+
+As explored above by Yu et al. (2015), the BPR function on dwell time assumes that dwell time is dependent on the dominant action at that stop, i.e. the greater number between boardings and alightings. Applying the same principle to this data however suggested that not only is that not the case, the utilization of the BPR function is impossible. The <i>maxdwell</i> time is calculated as the difference between the latest boarding or alighting time and the earliest boarding time. This represents the longest feasible dwell time, as the first boarding must have happened after the bus came to a full stop and all alightings may have happened before the bus departed.
+
+<b> Dwell time shows no meaningful correlation with number of boarding/alighting passengers|
+:--:
+![Rplot](https://user-images.githubusercontent.com/59413070/173252225-2dad85e6-53f7-42a3-89cd-727158c7fb53.png)
+  
+ 
