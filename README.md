@@ -105,6 +105,7 @@ this_onoff <-
   filter(is.na(boardings)|is.na(alightings)|(boardings < 60 & alightings < 60))
 this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
 ```
+                                                     
 </details>
 
 |![arregated](https://user-images.githubusercontent.com/59413070/173253531-6cb942b5-ff9c-4e72-a2b6-2e2e56942d16.PNG)|
