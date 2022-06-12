@@ -70,7 +70,7 @@ glimpse(sample_df)
 <details>
 <summary>Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.</summary>
 
-```
+```r
 today_brt[today_brt == "~"] <- NA
 today_brt$운행출발일시  <- ymd_hms(today_brt$운행출발일시)
 today_brt$승차일시  <- ymd_hms(today_brt$승차일시)
@@ -145,4 +145,11 @@ It need be noted however that when looking at each individual link between two c
 ![image](https://user-images.githubusercontent.com/59413070/173253409-07546470-9494-41a9-8e3b-fa1fb815b549.png)|![image](https://user-images.githubusercontent.com/59413070/173253413-0082ad61-9160-41be-bf9d-9c23743e86d3.png)
 
 ## V. Concluding Remarks
-### 
+### Next steps for this study
+- [x] Simplify network by truncating branches
+<img src="https://user-images.githubusercontent.com/59413070/173253829-7eb6fcc3-9d51-4b8c-a3d2-7c1a1216cb97.png" height="250"/>
+- [ ] Elect more fit model for estimating dwell time and travel time (separately)
+- [ ] Add capacity and maximum travel time constraints
+
+### Further studies
+* Introduce comptetition between operators
