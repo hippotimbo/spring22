@@ -13,19 +13,29 @@ Bus rapid transit (BRT) systems attempt to improve the quality of bus services b
 
 Ultimately this results in a Nash equilibrium where each operator chooses to employ more buses than is optimal for the sake of passenger utility. Because each operator seeks to maximize its revenue and avoid the worst-case scenarios, the rational choice for both is to increase frequency to the point where travel speed along the BRT corridor is slow and the revenue low.
 
-![Nash equilibrium](https://user-images.githubusercontent.com/59413070/173248133-ff3e712d-1602-4c30-b02d-0110ae25160f.png)
-
+![Nash equilibrium](https://user-images.githubusercontent.com/59413070/173248133-ff3e712d-1602-4c30-b02d-0110ae25160f.png)|![image](https://user-images.githubusercontent.com/59413070/173249493-b12dd606-cef4-443d-9daf-f60327ffc4d6.png)
+:--:|:--:
+<b> Dotted line as average travel time from A to B at t_<sub>0</sub>.</b>|<b>Travel time from B to C extrapolated using trip from A to C(pink).</b>
 
 
 
 ### 2. Contribution
 To the best of my knowledge, research on the bus scheduling problem with regards to variable travel times assumed "mixed" traffic conditions. In other words, travel times were considered to be dependent on the time of day and non-bus traffic conditions, independent to the operational pattern of buses. With respect to bus-only lanes, such an assumption cannot hold. The link travel time along a BRT corridor is dependent only on the volume (frequency) of buses on it. In other words, the schedulling of buses is the direct and only determinant of its travel time.
-As such, by adjusting the timetables of multiple lines along a shared BRT corridor while taking changes in travel times due to the adjustments into account, a more desirable operation of a BRT system may be achieved. Because buses in South Korea are run in a (semi) public structure where operators do not have to compete with each other and overall passenger utility is pursued instead, this study focuses on minimizing the average travel time among *all* passengers involved.
+As such, by adjusting the timetables of multiple lines along a shared BRT corridor while taking changes in travel times due to these adjustments into account, a more desirable operation of a BRT system may be achieved. Because buses in South Korea are run in a (semi)public structure where operators do not have to compete with each other and overall passenger utility is pursued instead, this study focuses on minimizing the average travel time among *all* passengers involved.
 
 
 ## II. Background
-### 1. Existing Studies
-#### Header 4 test
+### 1. A Data-Driven and Optimal Bus Scheduling Model With Time-Dependent Traffic and Demand (Wang et al., 2017)
+#### Summary
+* Extrapolates varying travel times between consecutive bus stops by time of day from smart card data.
+* Divides the day into 1,440 intervals (1 minute) and calculates the average travel time for each link at each interval.
+* Makes use of multiple-stop trip entries by dividing them into several consecutive segments.
+* 
+
+#### Challenges & Shortcomings
+* Travel times are dependent on time of day only.
+* Cannot distinguish between time spent on boarding/disboarding, waiting in queue, and actual travelling.
+![image](https://user-images.githubusercontent.com/59413070/173249479-8af7993a-39d7-4d99-95da-e974fc716294.png)
 
 
 ### Markdown
