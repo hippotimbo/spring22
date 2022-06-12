@@ -9,7 +9,7 @@ Bus rapid transit (BRT) systems attempt to improve the quality of bus services b
 <b>Brisbane Metro at rush hour</b>|<b>Line map</b>
 
 ![Goyang_BRT_Congestion](https://user-images.githubusercontent.com/59413070/173245460-abe099f8-ed78-4700-a2d7-56e76a321744.jpg)
-:--:
+:--:|
 <b>Goyang BRT at rush hour</b> <i>(and why this problem is personal)</i>|
 
 Ultimately this results in a Nash equilibrium where each operator chooses to employ more buses than is optimal for the sake of passenger utility. Because each operator seeks to maximize its revenue and avoid the worst-case scenarios, the rational choice for both is to increase frequency to the point where travel speed along the BRT corridor is slow and the revenue low.
