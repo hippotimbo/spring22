@@ -84,23 +84,28 @@ today_brt$승차정류장ID_교통사업자 <- mapvalues(
   from = c(9004357,9034780,9034778,9034804,9034774,9034799,9036576,7000088,9034805,9034770),
   to = c(4106837,4106840,4106851,4106852,4110807,4106859,4106821,4196166,4196168,4106818)
 )
+  
 today_brt$하차정류장ID_정산사업자  <- mapvalues(
   today_brt$하차정류장ID_정산사업자,
   from = c(9004357,9034780,9034778,9034804,9034774,9034799,9036576,7000088,9034805,9034770),
   to = c(4106837,4106840,4106851,4106852,4110807,4106859,4106821,4196166,4196168,4106818)
 )
+                            
 #### dw and tt sep ####
 this_on <- today_brt %>%
   group_by(노선ID_정산사업자,운행출발일시,승차정류장ID_교통사업자,차량등록번호) %>%
   dplyr::summarise(boardings=sum(이용객수_다인승),firston=min(승차일시),laston=max(승차일시))
+  
 this_off <- today_brt %>%
   group_by(노선ID_정산사업자,운행출발일시,하차정류장ID_정산사업자,차량등록번호) %>%
   dplyr::summarise(alightings=sum(이용객수_다인승),firstoff=min(하차일시),lastoff=max(하차일시))
+  
 this_onoff <-
   full_join(this_on,
             this_off,
             by = c('노선ID_정산사업자', '차량등록번호','운행출발일시', '승차정류장ID_교통사업자' = '하차정류장ID_정산사업자')) |>
   filter(is.na(boardings)|is.na(alightings)|(boardings < 60 & alightings < 60))
+  
 this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
 ```                                                     
 </details>
