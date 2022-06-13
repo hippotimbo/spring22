@@ -72,6 +72,9 @@ glimpse(sample_df)
 ### OD and operation records
 Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.
 
+![image](https://user-images.githubusercontent.com/59413070/173263437-35080e4c-52d5-4d1d-b352-528d7d96aa9b.png)
+
+
 ```r
 today_brt[today_brt == "~"] <- NA
 today_brt$운행출발일시  <- ymd_hms(today_brt$운행출발일시)
