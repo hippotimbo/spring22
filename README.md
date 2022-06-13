@@ -36,8 +36,8 @@ As such, by adjusting the timetables of multiple lines along a shared BRT corrid
 * Travel times are dependent on time of day only.
 * Cannot distinguish between time spent on boarding/alighting, waiting in queue, and actual travelling.
 
-![image](https://user-images.githubusercontent.com/59413070/173249479-8af7993a-39d7-4d99-95da-e974fc716294.png)|![image](https://user-images.githubusercontent.com/59413070/173249493-b12dd606-cef4-443d-9daf-f60327ffc4d6.png)|
-:---:|:---:
+|![image](https://user-images.githubusercontent.com/59413070/173249479-8af7993a-39d7-4d99-95da-e974fc716294.png)|![image](https://user-images.githubusercontent.com/59413070/173249493-b12dd606-cef4-443d-9daf-f60327ffc4d6.png)|
+|:-----:|:-----:|
 |<b> Average travel time from A to B at t<sub>0</sub> (dotted line).</b>|<b>Travel time from B to C extrapolated using trip from A to C (pink).</b>|
 
 ### 2. A bi-level programming for bus lane network design (Yu et al., 2015)
