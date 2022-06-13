@@ -63,9 +63,9 @@ Smart card data for a four-day period (16 Sep ~ 19 Sep 2017) was used. Data for 
 ```
 glimpse(sample_df)
 ```
-![image](https://user-images.githubusercontent.com/59413070/173251346-601802a5-514a-4714-aacf-43f4cd325901.png)
-:---:
-<b> sample structure of data used </b>|
+|![image](https://user-images.githubusercontent.com/59413070/173251346-601802a5-514a-4714-aacf-43f4cd325901.png)|
+|:---:|
+|<b> sample structure of data used </b>|
 
 ### OD and operation records
 <details>
