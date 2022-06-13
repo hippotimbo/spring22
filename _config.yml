@@ -1,3 +1,30 @@
-theme: jekyll-theme-tactile
-title: Spring 2022 Final Presentation
-description: 2021011154 Choi Won Gyun, Korea Univ.
+
+output: 
+  html_document:
+    theme: jekyll-theme-tactile
+    title: Spring 2022 Final Presentation
+    description: 2021011154 Choi Won Gyun, Korea Univ.
+    toc: true
+    toc_float: true
+---
+```{css, echo = FALSE}
+#TOC {
+  position: fixed;
+  left: 30px;
+  width: 400px;
+  max-width:120%;
+  overflow:auto;
+}
+h1.title{
+  color: navy;
+}
+h1 {
+  color: blue;
+}
+h2 {
+  color: green;
+}
+h3 {
+  color: orange;
+}
+```
