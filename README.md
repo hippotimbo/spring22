@@ -70,6 +70,7 @@ glimpse(sample_df)
 |<b> sample structure of data used </b>|
 
 ### OD and operation records
+Filtering:
 <details>
 <summary>
   Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.
