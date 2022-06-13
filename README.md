@@ -51,7 +51,7 @@ As such, by adjusting the timetables of multiple lines along a shared BRT corrid
 
 #### Challenges & Shortcomings
 * Travel times are dependent on time of day only.
-* BPR function parameters ($\alpha$, $\beta$) fixed at the generic values.
+* BPR function parameters (&alpha;, &beta;) fixed at the generic values.
 * No calibration and comfirmation of model design with actual figures.
 
 
