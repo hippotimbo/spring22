@@ -1,3 +1,5 @@
 remote_theme: just-the-docs/just-the-docs
 title: Spring 2022 Final Presentation
 description: 2021011154 Choi Won Gyun, Korea Univ.
+
+theme: jekyll-theme-tactile
