@@ -71,7 +71,7 @@ glimpse(sample_df)
 <details>
 <summary>Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.</summary>
 
-```r
+```
 today_brt[today_brt == "~"] <- NA
 today_brt$운행출발일시  <- ymd_hms(today_brt$운행출발일시)
 today_brt$승차일시  <- ymd_hms(today_brt$승차일시)
@@ -104,7 +104,6 @@ this_onoff <-
             by = c('노선ID_정산사업자', '차량등록번호','운행출발일시', '승차정류장ID_교통사업자' = '하차정류장ID_정산사업자')) |>
   filter(is.na(boardings)|is.na(alightings)|(boardings < 60 & alightings < 60))
 this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
-
 ```                                                     
 </details>
 
