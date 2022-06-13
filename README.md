@@ -70,7 +70,6 @@ glimpse(sample_df)
 |<b> sample structure of data used </b>|
 
 ### OD and operation records
-Filtering:
 <details>
 <summary>
   Trips where either the origin or the destination is part of Goyang BRT were filtered, and those that shared the same bus were aggregated. The earliest and latest boarding and alighting times for each bus at each stop were also recorded, along with the number of passengers for each.
@@ -88,6 +87,8 @@ today_brt$승차정류장ID_교통사업자 <- mapvalues(
   from = c(9004357,9034780,9034778,9034804,9034774,9034799,9036576,7000088,9034805,9034770),
   to = c(4106837,4106840,4106851,4106852,4110807,4106859,4106821,4196166,4196168,4106818)
 )
+  
+```
   
 today_brt$하차정류장ID_정산사업자  <- mapvalues(
   today_brt$하차정류장ID_정산사업자,
