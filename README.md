@@ -63,9 +63,9 @@ Smart card data for a four-day period (16 Sep ~ 19 Sep 2017) was used. Data for 
 ```
 glimpse(sample_df)
 ```
-|![image](https://user-images.githubusercontent.com/59413070/173251346-601802a5-514a-4714-aacf-43f4cd325901.png)|
-|:---:|
-|<b> sample structure of data used </b>|
+![image](https://user-images.githubusercontent.com/59413070/173251346-601802a5-514a-4714-aacf-43f4cd325901.png)
+:---:
+<b> sample structure of data used </b>|
 
 ### OD and operation records
 <details>
@@ -104,8 +104,8 @@ this_onoff <-
             by = c('노선ID_정산사업자', '차량등록번호','운행출발일시', '승차정류장ID_교통사업자' = '하차정류장ID_정산사업자')) |>
   filter(is.na(boardings)|is.na(alightings)|(boardings < 60 & alightings < 60))
 this_onoff$boardings[is.na(this_onoff$boardings)] <- 0
-```
-                                                     
+
+```                                                     
 </details>
 
 |![arregated](https://user-images.githubusercontent.com/59413070/173253531-6cb942b5-ff9c-4e72-a2b6-2e2e56942d16.PNG)|
